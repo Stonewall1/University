@@ -1,12 +1,18 @@
 package by.tms.domain;
 
+import javax.persistence.*;
 import java.util.Objects;
 import java.util.Set;
 
+@Entity(name = "Teacher")
+@Table(name = "teachers")
 public class Teacher {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
     private String surname;
+    @ElementCollection
     private Set<Subject> subjects;
 
     public Teacher() {

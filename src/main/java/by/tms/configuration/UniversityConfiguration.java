@@ -34,7 +34,7 @@ public class UniversityConfiguration {
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
-        sessionFactory.setPackagesToScan("by.tms.entity");
+        sessionFactory.setPackagesToScan("by.tms.domain");
         sessionFactory.setHibernateProperties(hibernateProperties());
         return sessionFactory;
     }

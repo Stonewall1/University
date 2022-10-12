@@ -1,18 +1,26 @@
 package by.tms.domain;
 
+import javax.persistence.*;
 import java.util.*;
 
+@Entity(name = "Student")
+@Table(name = "students")
 public class Student {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
     private String surname;
-    private Map<Subject, List<Integer>> performance = new HashMap<>();
+    @OneToMany(mappedBy = "student",cascade = CascadeType.ALL)
+//    @MapKeyEnumerated(EnumType.STRING)
+    @MapKey(name = "subject")
+    private Map<Subject, Ratings> performance = new HashMap<>();
     private double GPA;
 
     public Student() {
     }
 
-    public Student(long id, String name, String surname, Map<Subject, List<Integer>> performance, double GPA) {
+    public Student(long id, String name, String surname, Map<Subject, Ratings> performance, double GPA) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -44,11 +52,11 @@ public class Student {
         this.surname = surname;
     }
 
-    public Map<Subject, List<Integer>> getPerformance() {
+    public Map<Subject, Ratings> getPerformance() {
         return performance;
     }
 
-    public void setPerformance(Map<Subject, List<Integer>> performance) {
+    public void setPerformance(Map<Subject, Ratings> performance) {
         this.performance = performance;
     }
 
@@ -83,5 +91,4 @@ public class Student {
     public int hashCode() {
         return Objects.hash(id, name, surname, performance, GPA);
     }
-
 }
