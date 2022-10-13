@@ -1,21 +1,27 @@
 package by.tms.domain;
 
 import javax.persistence.*;
-import java.util.List;
 
-@Entity(name = "Ratings")
-public class Ratings {
+@Entity
+@Table(name = "results")
+public class Result {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @ManyToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Student student;
     @Enumerated(EnumType.STRING)
     private Subject subject;
-    @ElementCollection
-    private List<Integer> performance;
+    private Integer performance;
 
-    public Ratings() {
+    public Result() {
+    }
+
+    public Result(long id, Student student, Subject subject, Integer performance) {
+        this.id = id;
+        this.student = student;
+        this.subject = subject;
+        this.performance = performance;
     }
 
     public long getId() {
@@ -42,17 +48,17 @@ public class Ratings {
         this.subject = subject;
     }
 
-    public List<Integer> getPerformance() {
+    public Integer getPerformance() {
         return performance;
     }
 
-    public void setPerformance(List<Integer> performance) {
+    public void setPerformance(Integer performance) {
         this.performance = performance;
     }
 
     @Override
     public String toString() {
-        return "Ratings{" +
+        return "Result{" +
                 "id=" + id +
                 ", student=" + student +
                 ", subject=" + subject +

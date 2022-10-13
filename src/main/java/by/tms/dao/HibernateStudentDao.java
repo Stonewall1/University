@@ -26,8 +26,10 @@ public class HibernateStudentDao implements HibernateDao<Student, Long> {
     }
 
     @Override
-    public Optional<Student> findById(Long aLong) {
-        return Optional.empty();
+    public Optional<Student> findById(Long id) {
+        Session session = sessionFactory.getCurrentSession();
+        Student student = session.find(Student.class, id);
+        return Optional.of(student);
     }
 
     @Override
@@ -38,13 +40,20 @@ public class HibernateStudentDao implements HibernateDao<Student, Long> {
     }
 
     @Override
-    public Student update(Long aLong, String param1, String param2) {
-        return null;
+    public Student update(Long id, String name, String surname , String password) {
+        Session session = sessionFactory.getCurrentSession();
+        session.createQuery("update Student set name =: nameP , surname =:surnameP , password =:passwordP where id =: ip")
+                .setParameter("ip" , id)
+                .setParameter("nameP" , name)
+                .setParameter("surnameP" , surname)
+                .setParameter("passwordP" , password)
+                .executeUpdate();
+        return session.find(Student.class , id);
     }
 
     @Override
     public List<Student> findAll() {
         Session session = sessionFactory.getCurrentSession();
-        return null;
+        return session.createQuery("from Student" , Student.class).getResultList();
     }
 }

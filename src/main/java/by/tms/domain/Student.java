@@ -1,6 +1,8 @@
 package by.tms.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.*;
 
 @Entity(name = "Student")
@@ -9,22 +11,32 @@ public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @NotBlank(message = "Field cant be empty")
     private String name;
+    @NotBlank(message = "Field cant be empty")
     private String surname;
-    @OneToMany(mappedBy = "student",cascade = CascadeType.ALL)
-//    @MapKeyEnumerated(EnumType.STRING)
-    @MapKey(name = "subject")
-    private Map<Subject, Ratings> performance = new HashMap<>();
+    @NotBlank(message = "Field cant be empty")
+    private String password;
+    @ElementCollection
+    @Enumerated(EnumType.STRING)
+    @Size(min = 1)
+    private Set<Subject> subjects;
+//    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
+//    @MapKey(name = "subject")
+//    @Enumerated(EnumType.STRING)
+//    @Size(min = 1)
+//    private Map<Subject, Ratings> performance;
     private double GPA;
 
     public Student() {
     }
 
-    public Student(long id, String name, String surname, Map<Subject, Ratings> performance, double GPA) {
+    public Student(long id, String name, String surname, String password, Set<Subject> subjects, double GPA) {
         this.id = id;
         this.name = name;
         this.surname = surname;
-        this.performance = performance;
+        this.password = password;
+        this.subjects = subjects;
         this.GPA = GPA;
     }
 
@@ -52,12 +64,20 @@ public class Student {
         this.surname = surname;
     }
 
-    public Map<Subject, Ratings> getPerformance() {
-        return performance;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPerformance(Map<Subject, Ratings> performance) {
-        this.performance = performance;
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Set<Subject> getSubjects() {
+        return subjects;
+    }
+
+    public void setSubjects(Set<Subject> subjects) {
+        this.subjects = subjects;
     }
 
     public double getGPA() {
@@ -74,7 +94,8 @@ public class Student {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
-                ", performance=" + performance +
+                ", password='" + password + '\'' +
+                ", subjects=" + subjects +
                 ", GPA=" + GPA +
                 '}';
     }
@@ -84,11 +105,11 @@ public class Student {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Student student = (Student) o;
-        return id == student.id && Double.compare(student.GPA, GPA) == 0 && Objects.equals(name, student.name) && Objects.equals(surname, student.surname) && Objects.equals(performance, student.performance);
+        return id == student.id && Double.compare(student.GPA, GPA) == 0 && Objects.equals(name, student.name) && Objects.equals(surname, student.surname) && Objects.equals(password, student.password) && Objects.equals(subjects, student.subjects);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, surname, performance, GPA);
+        return Objects.hash(id, name, surname, password, subjects, GPA);
     }
 }
