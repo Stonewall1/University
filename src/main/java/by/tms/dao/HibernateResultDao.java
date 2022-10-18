@@ -1,16 +1,12 @@
 package by.tms.dao;
 
-import by.tms.domain.Result;
-import by.tms.domain.Student;
-import by.tms.domain.Subject;
+import by.tms.entity.Result;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 @Repository
 @Component("HibernateResultDao")
@@ -40,8 +36,6 @@ public class HibernateResultDao implements HibernateDao<Result, Long>{
         session.delete(result);
         return result;
     }
-
-
 
     @Override
     public Result update(Long aLong, String param1, String param2, String param3) {

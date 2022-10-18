@@ -1,6 +1,6 @@
 package by.tms.controller;
 
-import by.tms.domain.Student;
+import by.tms.entity.Student;
 import by.tms.service.StudentService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,17 +22,18 @@ public class StudentController {
     }
 
 
-    @GetMapping("/studentRegistration")
+    @GetMapping("/registration")
     public String registration(@ModelAttribute("newStudent") Student student) {
         return "studentRegistration";
     }
 
-    @PostMapping("/studentRegistration")
+    @PostMapping("/registration")
     public String registration(@Valid @ModelAttribute("newStudent") Student student, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return "studentRegistration";
         }
         studentService.save(student);
-        return "startpage";
+        System.out.println(student);
+        return "homepage";
     }
 }

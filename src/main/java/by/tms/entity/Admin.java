@@ -1,37 +1,32 @@
-package by.tms.domain;
+package by.tms.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
-import java.util.Objects;
-import java.util.Set;
 
-@Entity(name = "Teacher")
-@Table(name = "teachers")
-public class Teacher {
+@Entity
+@Table(name = "admins")
+public class Admin {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     @NotBlank(message = "Field cant be empty")
     private String name;
+
     @NotBlank(message = "Field cant be empty")
     private String surname;
+
     @NotBlank(message = "Field cant be empty")
     private String password;
-    @ElementCollection
-    @Enumerated(EnumType.STRING)
-    @Size(min = 1)
-    private Set<Subject> subjects;
 
-    public Teacher() {
+    public Admin() {
     }
 
-    public Teacher(long id, String name, String surname, String password, Set<Subject> subjects) {
+    public Admin(long id, String name, String surname, String password) {
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.password = password;
-        this.subjects = subjects;
     }
 
     public long getId() {
@@ -66,35 +61,13 @@ public class Teacher {
         this.password = password;
     }
 
-    public Set<Subject> getSubjects() {
-        return subjects;
-    }
-
-    public void setSubjects(Set<Subject> subjects) {
-        this.subjects = subjects;
-    }
-
     @Override
     public String toString() {
-        return "Teacher{" +
+        return "Admin{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", password='" + password + '\'' +
-                ", subjects=" + subjects +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Teacher teacher = (Teacher) o;
-        return id == teacher.id && Objects.equals(name, teacher.name) && Objects.equals(surname, teacher.surname) && Objects.equals(password, teacher.password) && Objects.equals(subjects, teacher.subjects);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, surname, password, subjects);
     }
 }

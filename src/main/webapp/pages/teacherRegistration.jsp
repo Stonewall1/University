@@ -9,7 +9,7 @@
     <title>Teacher Registration</title>
 </head>
 <body>
-<s:form action="/teacher/teacherRegistration" method="post" modelAttribute="newTeacher">
+<s:form action="/teacher/registration" method="post" modelAttribute="newTeacher">
     <s:input path="name" placeholder="Input name"/>
     <br>
     <s:errors path="name" cssStyle="color: red"/>
@@ -22,18 +22,9 @@
     <br>
     <s:errors path="password" cssStyle="color: red"/>
     <br>
-    <p>Choose subjects you want to teach:</p>
-    <s:checkbox path="subjects" value="MATHS"/>Maths<br/>
-    <s:checkbox path="subjects" value="FOREIGN_LANGUAGE"/>Foreign language<br/>
-    <s:checkbox path="subjects" value="PHYSICS"/>Physics<br/>
-    <s:checkbox path="subjects" value="CHEMISTRY"/>Chemistry<br/>
-    <s:checkbox path="subjects" value="PE"/>PE<br/>
-    <s:checkbox path="subjects" value="HISTORY"/>History<br/>
-    <s:checkbox path="subjects" value="IT"/>IT<br/>
-    <s:checkbox path="subjects" value="AUTOMATICS"/>Automatics<br/>
     <br>
     <s:button>Register</s:button>
-    <a href="/startpage" class="btn btn-primary">Back</a>
+    <a href="/" class="btn btn-primary">Back</a>
 </s:form>
 <p style="color: red">${message}</p>
 </body>

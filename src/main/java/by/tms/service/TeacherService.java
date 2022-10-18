@@ -1,8 +1,8 @@
 package by.tms.service;
 
 import by.tms.dao.HibernateDao;
-import by.tms.domain.Result;
-import by.tms.domain.Teacher;
+import by.tms.entity.Result;
+import by.tms.entity.Teacher;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,10 +42,5 @@ public class TeacherService {
     @Transactional(readOnly = true)
     public List<Teacher> findAll() {
         return hibernateTeacherDao.findAll();
-    }
-
-    @Transactional
-    public void toRate(Result ratings) {
-
     }
 }

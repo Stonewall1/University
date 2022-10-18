@@ -1,7 +1,7 @@
 package by.tms.service;
 
 import by.tms.dao.HibernateDao;
-import by.tms.domain.Student;
+import by.tms.entity.Student;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

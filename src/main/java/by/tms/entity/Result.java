@@ -1,4 +1,4 @@
-package by.tms.domain;
+package by.tms.entity;
 
 import javax.persistence.*;
 
@@ -8,10 +8,13 @@ public class Result {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     @OneToOne(cascade = CascadeType.ALL)
     private Student student;
-    @Enumerated(EnumType.STRING)
+
+    @OneToOne(cascade = CascadeType.ALL)
     private Subject subject;
+
     private Integer performance;
 
     public Result() {

@@ -1,6 +1,6 @@
 package by.tms.dao;
 
-import by.tms.domain.Student;
+import by.tms.entity.Student;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Component;
