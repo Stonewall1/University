@@ -32,7 +32,6 @@ public class TeacherController {
             return "teacherRegistration";
         }
         teacherService.save(teacher);
-        System.out.println(teacher);
         return "homepage";
     }
 }

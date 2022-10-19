@@ -7,6 +7,7 @@ import java.util.Set;
 @Table(name = "lessons")
 public class Lesson {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @OneToMany(cascade = CascadeType.ALL)

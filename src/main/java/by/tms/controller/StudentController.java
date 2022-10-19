@@ -33,7 +33,6 @@ public class StudentController {
             return "studentRegistration";
         }
         studentService.save(student);
-        System.out.println(student);
         return "homepage";
     }
 }

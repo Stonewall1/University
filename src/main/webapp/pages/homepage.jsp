@@ -15,6 +15,7 @@
 <h3>Welcome to the University</h3>
 <a href="/admin/registration" class="btn btn-primary">Register as Admin</a>
 <a href="/admin/login" class="btn btn-primary">Login as Admin</a>
+<a href="/admin/adminPage" class="btn btn-primary">Admin page</a>
 <br>
 <br>
 <a href="/student/registration" class="btn btn-primary">Register as a Student</a>

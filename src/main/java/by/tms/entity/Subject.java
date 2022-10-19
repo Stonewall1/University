@@ -7,12 +7,17 @@ import javax.validation.constraints.NotBlank;
 @Table(name = "subjects")
 public class Subject {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @NotBlank
     private String subjectName;
 
     public Subject() {
+    }
+
+    public Subject(String subjectName) {
+        this.subjectName = subjectName;
     }
 
     public Subject(long id, String subjectName) {
