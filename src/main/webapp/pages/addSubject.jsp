@@ -14,6 +14,7 @@
     <input type="text" name="subjectName" placeholder="SubjectName">
     <button>Add</button>
 </form>
+<p style="color: red">${message}</p>
 <a href="/admin/adminPage"> Back</a>
 </body>
 </html>

@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class AdminService {
 
@@ -19,5 +21,14 @@ public class AdminService {
     @Transactional
     public Admin save(Admin admin) {
         return hibernateAdminDao.save(admin);
+    }
+    @Transactional(readOnly = true)
+    public List<Admin> findAll(){
+        return hibernateAdminDao.findAll();
+    }
+    @Transactional
+    public boolean isInBase(Admin admin){
+        List<Admin> admins = findAll().stream().filter(admin1 -> admin1.equals(admin)).toList();
+        return admins.size() > 0;
     }
 }

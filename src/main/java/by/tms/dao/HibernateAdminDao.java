@@ -44,6 +44,7 @@ public class HibernateAdminDao implements HibernateDao<Admin, Long> {
 
     @Override
     public List<Admin> findAll() {
-        return null;
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("from Admin" , Admin.class).getResultList();
     }
 }

@@ -37,6 +37,10 @@ public class AdminController {
         if (bindingResult.hasErrors()) {
             return "adminRegistration";
         }
+        if (adminService.isInBase(admin)) {
+            model.addAttribute("message", "Admin already in base");
+            return "adminRegistration";
+        }
         adminService.save(admin);
         return "homepage";
     }
@@ -47,17 +51,23 @@ public class AdminController {
     }
 
     @PostMapping("/login")
-    public String login(@Valid @ModelAttribute("newAdmin") Admin admin, BindingResult bindingResult, HttpSession session) {
+    public String login(@Valid @ModelAttribute("newAdmin") Admin admin, BindingResult bindingResult, HttpSession session, Model model) {
         if (bindingResult.hasErrors()) {
             return "adminLogin";
         }
-        session.setAttribute("currentAdmin", admin);
-        return "redirect:/";
+        if (adminService.isInBase(admin)) {
+            session.setAttribute("currentAdmin", admin);
+            return "redirect:/";
+        } else {
+            model.addAttribute("message", "No such admin in base");
+            return "adminLogin";
+        }
+
     }
 
     @GetMapping("/adminPage")
-    public String adminPage(Model model , HttpSession session) {
-        if(session.getAttribute("currentAdmin") != null){
+    public String adminPage(Model model, HttpSession session) {
+        if (session.getAttribute("currentAdmin") != null) {
             List<Subject> allSubjects = subjectService.findAll();
             model.addAttribute("allSubjects", allSubjects);
             return "adminPage";
@@ -67,17 +77,25 @@ public class AdminController {
 
     @PostMapping("/adminPage")
     public String adminPage() {
-       return "adminPage";
+        return "adminPage";
     }
+
     @GetMapping("/addSubject")
-    public String addSubject(){
+    public String addSubject() {
         return "addSubject";
     }
+
     @PostMapping("/addSubject")
-    public String addSubject(String subjectName){
-        subjectService.save(new Subject(subjectName));
+    public String addSubject(String subjectName , Model model) {
+        Subject newSub = new Subject(subjectName);
+        if(subjectService.isInBase(newSub)){
+            model.addAttribute("message" , "This subject already exists");
+            return "addSubject";
+        }
+        subjectService.save(newSub);
         return "addSubject";
     }
+
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();

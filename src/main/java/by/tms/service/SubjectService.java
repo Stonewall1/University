@@ -17,7 +17,7 @@ public class SubjectService {
         this.hibernateSubjectDao = hibernateSubjectDao;
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public List<Subject> findAll() {
         return hibernateSubjectDao.findAll();
     }
@@ -25,5 +25,10 @@ public class SubjectService {
     @Transactional
     public Subject save(Subject subject) {
         return hibernateSubjectDao.save(subject);
+    }
+    @Transactional
+    public boolean isInBase(Subject subject){
+        List<Subject> subjects = findAll().stream().filter(sub -> sub.equals(subject)).toList();
+        return subjects.size() > 0;
     }
 }
