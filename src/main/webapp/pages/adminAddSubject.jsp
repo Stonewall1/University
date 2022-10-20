@@ -6,7 +6,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>Add Subject</title>
+    <title>Admin Add Subject</title>
 </head>
 <body>
 <p>Add new subject to learn</p>

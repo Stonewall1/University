@@ -6,10 +6,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>Teacher Registration</title>
+    <title>Teacher Login</title>
 </head>
 <body>
-<s:form action="/teacher/registration" method="post" modelAttribute="newTeacher">
+<s:form action="/teacher/login" method="post" modelAttribute="newTeacher">
     <s:input path="name" placeholder="Input name"/>
     <br>
     <s:errors path="name" cssStyle="color: red"/>
@@ -23,14 +23,9 @@
     <s:errors path="password" cssStyle="color: red"/>
     <br>
     <br>
-    <p>Select subject(s) to teach :</p>
-    <c:forEach var="sub" items="${allSubjects}">
-        <s:checkbox path="subjects" value="${sub.subjectName}"/>${sub.subjectName}
-    </c:forEach>
-    <br>
-    <s:button>Register</s:button>
+    <s:button>Login</s:button>
+    <a href="/" class="btn btn-primary">Back</a>
 </s:form>
-<a href="/" class="btn btn-primary">Back</a>
 <p style="color: red">${message}</p>
 </body>
 </html>

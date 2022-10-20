@@ -1,9 +1,12 @@
 package by.tms.entity;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.Set;
+import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "teachers")
@@ -22,13 +25,13 @@ public class Teacher {
     private String password;
 
     @Size(min = 1)
-    @OneToMany(cascade = CascadeType.ALL)
-    private Set<Subject> subjects;
+    @OneToMany(cascade = CascadeType.ALL , fetch = FetchType.EAGER)
+    private List<Subject> subjects;
 
     public Teacher() {
     }
 
-    public Teacher(long id, String name, String surname, String password, Set<Subject> subjects) {
+    public Teacher(long id, String name, String surname, String password, List<Subject> subjects) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -68,11 +71,11 @@ public class Teacher {
         this.password = password;
     }
 
-    public Set<Subject> getSubjects() {
+    public List<Subject> getSubjects() {
         return subjects;
     }
 
-    public void setSubjects(Set<Subject> subjects) {
+    public void setSubjects(List<Subject> subjects) {
         this.subjects = subjects;
     }
 
@@ -85,5 +88,18 @@ public class Teacher {
                 ", password='" + password + '\'' +
                 ", subjects=" + subjects +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Teacher teacher = (Teacher) o;
+        return Objects.equals(name, teacher.name) && Objects.equals(surname, teacher.surname) && Objects.equals(password, teacher.password);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, surname, password);
     }
 }

@@ -1,5 +1,6 @@
 package by.tms.dao;
 
+import by.tms.entity.Admin;
 import by.tms.entity.Teacher;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -55,5 +56,13 @@ public class HibernateTeacherDao implements HibernateDao<Teacher , Long> {
     public List<Teacher> findAll() {
         Session session = sessionFactory.getCurrentSession();
         return session.createQuery("from Teacher" , Teacher.class).getResultList();
+    }
+
+    @Override
+    public Teacher findByParameter(String surname) {
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("from Teacher where surname =:s", Teacher.class)
+                .setParameter("s", surname)
+                .getSingleResult();
     }
 }

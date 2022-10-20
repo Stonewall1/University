@@ -31,4 +31,8 @@ public class AdminService {
         List<Admin> admins = findAll().stream().filter(admin1 -> admin1.equals(admin)).toList();
         return admins.size() > 0;
     }
+    @Transactional(readOnly = true)
+    public Admin bySurname(String surname){
+        return hibernateAdminDao.findByParameter(surname);
+    }
 }

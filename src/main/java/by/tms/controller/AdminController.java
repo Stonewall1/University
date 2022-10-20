@@ -55,14 +55,9 @@ public class AdminController {
         if (bindingResult.hasErrors()) {
             return "adminLogin";
         }
-        if (adminService.isInBase(admin)) {
-            session.setAttribute("currentAdmin", admin);
-            return "redirect:/";
-        } else {
-            model.addAttribute("message", "No such admin in base");
-            return "adminLogin";
-        }
-
+        Admin ad = adminService.bySurname(admin.getSurname());
+        session.setAttribute("currentAdmin", ad);
+        return "redirect:/";
     }
 
     @GetMapping("/adminPage")
@@ -82,18 +77,18 @@ public class AdminController {
 
     @GetMapping("/addSubject")
     public String addSubject() {
-        return "addSubject";
+        return "adminAddSubject";
     }
 
     @PostMapping("/addSubject")
-    public String addSubject(String subjectName , Model model) {
+    public String addSubject(String subjectName, Model model) {
         Subject newSub = new Subject(subjectName);
-        if(subjectService.isInBase(newSub)){
-            model.addAttribute("message" , "This subject already exists");
-            return "addSubject";
+        if (subjectService.isInBase(newSub)) {
+            model.addAttribute("message", "This subject already exists");
+            return "adminAddSubject";
         }
         subjectService.save(newSub);
-        return "addSubject";
+        return "adminAddSubject";
     }
 
     @GetMapping("/logout")

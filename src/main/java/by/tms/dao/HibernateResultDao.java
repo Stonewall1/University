@@ -47,4 +47,9 @@ public class HibernateResultDao implements HibernateDao<Result, Long>{
         Session session = sessionFactory.getCurrentSession();
         return session.createQuery("from Result " , Result.class).getResultList();
     }
+
+    @Override
+    public Result findByParameter(String param) {
+        return null;
+    }
 }

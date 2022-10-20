@@ -1,7 +1,6 @@
 package by.tms.service;
 
 import by.tms.dao.HibernateDao;
-import by.tms.entity.Result;
 import by.tms.entity.Teacher;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -42,5 +41,14 @@ public class TeacherService {
     @Transactional(readOnly = true)
     public List<Teacher> findAll() {
         return hibernateTeacherDao.findAll();
+    }
+    @Transactional
+    public boolean isInBase(Teacher teacher){
+        List<Teacher> teachers = findAll().stream().filter(teacher1 -> teacher1.equals(teacher)).toList();
+        return teachers.size() > 0;
+    }
+    @Transactional
+    public Teacher bySurname(String surname){
+        return hibernateTeacherDao.findByParameter(surname);
     }
 }

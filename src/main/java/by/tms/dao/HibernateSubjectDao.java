@@ -47,4 +47,9 @@ public class HibernateSubjectDao implements HibernateDao<Subject, Long> {
         Session session = sessionFactory.getCurrentSession();
         return session.createQuery("from Subject " , Subject.class).getResultList();
     }
+
+    @Override
+    public Subject findByParameter(String param) {
+        return null;
+    }
 }

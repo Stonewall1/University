@@ -56,4 +56,9 @@ public class HibernateStudentDao implements HibernateDao<Student, Long> {
         Session session = sessionFactory.getCurrentSession();
         return session.createQuery("from Student" , Student.class).getResultList();
     }
+
+    @Override
+    public Student findByParameter(String param) {
+        return null;
+    }
 }
