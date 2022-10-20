@@ -2,6 +2,7 @@ package by.tms.service;
 
 import by.tms.dao.HibernateDao;
 import by.tms.entity.Student;
+import by.tms.entity.Teacher;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,5 +43,14 @@ public class StudentService {
     @Transactional(readOnly = true)
     public List<Student> findAll() {
         return hibernateStudentDao.findAll();
+    }
+    @Transactional
+    public boolean isInBase(Student student){
+        List<Student> students = findAll().stream().filter(student1 -> student1.equals(student)).toList();
+        return students.size() > 0;
+    }
+    @Transactional
+    public Student bySurname(String surname){
+        return hibernateStudentDao.findByParameter(surname);
     }
 }

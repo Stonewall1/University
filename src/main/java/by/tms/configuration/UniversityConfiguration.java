@@ -51,6 +51,7 @@ public class UniversityConfiguration {
         hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
         hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
         hibernateProperties.setProperty("hibernate.show_sql", "true");
+        hibernateProperties.setProperty("hibernate.enable_lazy_load_no_trans", "true");
         return hibernateProperties;
     }
 

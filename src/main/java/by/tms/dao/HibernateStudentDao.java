@@ -1,6 +1,7 @@
 package by.tms.dao;
 
 import by.tms.entity.Student;
+import by.tms.entity.Teacher;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Component;
@@ -58,7 +59,10 @@ public class HibernateStudentDao implements HibernateDao<Student, Long> {
     }
 
     @Override
-    public Student findByParameter(String param) {
-        return null;
+    public Student findByParameter(String surname) {
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("from Student where surname =:s", Student.class)
+                .setParameter("s", surname)
+                .getSingleResult();
     }
 }

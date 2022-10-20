@@ -20,6 +20,7 @@
 <br>
 <a href="/student/registration" class="btn btn-primary">Register as a Student</a>
 <a href="/student/login" class="btn btn-primary">Login as Student</a>
+<a href="/student/studentPage" class="btn btn-primary">Student page</a>
 <br>
 <br>
 <a href="/teacher/registration" class="btn btn-primary">Register as a Teacher</a>

@@ -1,7 +1,7 @@
 package by.tms.entity;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "lessons")
@@ -11,7 +11,7 @@ public class Lesson {
     private long id;
 
     @OneToMany(cascade = CascadeType.ALL)
-    private Set<Student> students;
+    private List<Student> students;
 
     @OneToOne(cascade = CascadeType.ALL)
     private Teacher teacher;
@@ -22,7 +22,7 @@ public class Lesson {
     public Lesson() {
     }
 
-    public Lesson(long id, Set<Student> students, Teacher teacher, Subject subject) {
+    public Lesson(long id, List<Student> students, Teacher teacher, Subject subject) {
         this.id = id;
         this.students = students;
         this.teacher = teacher;
@@ -37,11 +37,11 @@ public class Lesson {
         this.id = id;
     }
 
-    public Set<Student> getStudents() {
+    public List<Student> getStudents() {
         return students;
     }
 
-    public void setStudents(Set<Student> students) {
+    public void setStudents(List<Student> students) {
         this.students = students;
     }
 

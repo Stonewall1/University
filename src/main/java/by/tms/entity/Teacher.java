@@ -25,7 +25,7 @@ public class Teacher {
     private String password;
 
     @Size(min = 1)
-    @OneToMany(cascade = CascadeType.ALL , fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Subject> subjects;
 
     public Teacher() {

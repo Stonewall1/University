@@ -23,7 +23,7 @@ public class Student {
 
     @Size(min = 1)
     @OneToMany(cascade = CascadeType.ALL)
-    private Set<Subject> subjects;
+    private List<Subject> subjects;
 
     private double GPA;
 
@@ -33,7 +33,7 @@ public class Student {
     public Student() {
     }
 
-    public Student(long id, String name, String surname, String password, Set<Subject> subjects, double GPA, List<Result> results) {
+    public Student(long id, String name, String surname, String password, List<Subject> subjects, double GPA, List<Result> results) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -75,11 +75,11 @@ public class Student {
         this.password = password;
     }
 
-    public Set<Subject> getSubjects() {
+    public List<Subject> getSubjects() {
         return subjects;
     }
 
-    public void setSubjects(Set<Subject> subjects) {
+    public void setSubjects(List<Subject> subjects) {
         this.subjects = subjects;
     }
 
@@ -110,5 +110,18 @@ public class Student {
                 ", GPA=" + GPA +
                 ", results=" + results +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Student student = (Student) o;
+        return Objects.equals(name, student.name) && Objects.equals(surname, student.surname) && Objects.equals(password, student.password);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, surname, password);
     }
 }

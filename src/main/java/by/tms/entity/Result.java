@@ -13,17 +13,17 @@ public class Result {
     private Student student;
 
     @OneToOne(cascade = CascadeType.ALL)
-    private Subject subject;
+    private Lesson lesson;
 
     private Integer performance;
 
     public Result() {
     }
 
-    public Result(long id, Student student, Subject subject, Integer performance) {
+    public Result(long id, Student student, Lesson lesson, Integer performance) {
         this.id = id;
         this.student = student;
-        this.subject = subject;
+        this.lesson = lesson;
         this.performance = performance;
     }
 
@@ -43,12 +43,12 @@ public class Result {
         this.student = student;
     }
 
-    public Subject getSubject() {
-        return subject;
+    public Lesson getLesson() {
+        return lesson;
     }
 
-    public void setSubject(Subject subject) {
-        this.subject = subject;
+    public void setLesson(Lesson lesson) {
+        this.lesson = lesson;
     }
 
     public Integer getPerformance() {
@@ -64,7 +64,7 @@ public class Result {
         return "Result{" +
                 "id=" + id +
                 ", student=" + student +
-                ", subject=" + subject +
+                ", lesson=" + lesson +
                 ", performance=" + performance +
                 '}';
     }
