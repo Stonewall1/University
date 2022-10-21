@@ -12,13 +12,13 @@ public class Lesson {
 
     private String lessonTheme;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @ManyToMany//(cascade = CascadeType.ALL)
     private List<Student> students;
 
-    @OneToOne//(cascade = CascadeType.ALL)
+    @ManyToOne//(cascade = CascadeType.ALL) // ManyToOne
     private Teacher teacher;
 
-    @OneToOne//(cascade = CascadeType.ALL)
+    @ManyToOne//(cascade = CascadeType.ALL) //ManyToOne
     private Subject subject;
 
     public Lesson() {
@@ -28,6 +28,12 @@ public class Lesson {
         this.id = id;
         this.lessonTheme = lessonTheme;
         this.students = students;
+        this.teacher = teacher;
+        this.subject = subject;
+    }
+
+    public Lesson(String lessonTheme, Teacher teacher, Subject subject) {
+        this.lessonTheme = lessonTheme;
         this.teacher = teacher;
         this.subject = subject;
     }

@@ -32,4 +32,8 @@ public class LessonService {
     public Lesson findByTeacherSurname(String teacherSurname) {
         return hibernateLessonDao.findByParameter(teacherSurname);
     }
+    @Transactional
+    public Lesson update(Lesson lesson){
+        return hibernateLessonDao.update(lesson);
+    }
 }

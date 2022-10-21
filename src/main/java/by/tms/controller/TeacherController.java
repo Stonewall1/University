@@ -1,8 +1,10 @@
 package by.tms.controller;
 
+import by.tms.entity.Lesson;
 import by.tms.entity.Student;
 import by.tms.entity.Subject;
 import by.tms.entity.Teacher;
+import by.tms.service.LessonService;
 import by.tms.service.StudentService;
 import by.tms.service.SubjectService;
 import by.tms.service.TeacherService;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -24,11 +27,13 @@ public class TeacherController {
     private final TeacherService teacherService;
     private final SubjectService subjectService;
     private final StudentService studentService;
+    private final LessonService lessonService;
 
-    public TeacherController(TeacherService teacherService, SubjectService subjectService, StudentService studentService) {
+    public TeacherController(TeacherService teacherService, SubjectService subjectService, StudentService studentService, LessonService lessonService) {
         this.teacherService = teacherService;
         this.subjectService = subjectService;
         this.studentService = studentService;
+        this.lessonService = lessonService;
     }
 
     @GetMapping("/registration")
@@ -97,19 +102,41 @@ public class TeacherController {
     }
 
     @GetMapping("/createLesson")
-    public String createLesson(HttpSession session) {
+    public String createLesson(@ModelAttribute("newLesson") Lesson lesson, HttpSession session, Model model) {
         Teacher teacher = (Teacher) session.getAttribute("currentTeacher");
-        // System.out.println(teacher.getSubjects());
-        List<Student> allStudents = studentService.findAll();
-        //   System.out.println(allStudents);
-        //toDo
+        List<Subject> teacherSubjects = teacher.getSubjects();
+        model.addAttribute("teacherSubjects", teacherSubjects);
         return "createLesson";
     }
 
     @PostMapping("/createLesson")
-    public String createLesson() {
-//toDo
-        return "createLesson";
+    public String createLesson(@ModelAttribute("newLesson") Lesson lesson, HttpSession session) {
+        Teacher teacher = (Teacher) session.getAttribute("currentTeacher");
+        Subject bySubjectName = subjectService.findBySubjectName(lesson.getSubject().getSubjectName());
+
+        lesson.setTeacher(teacher);
+        lesson.setSubject(bySubjectName);
+        lesson.setStudents(new ArrayList<>());
+
+        lessonService.save(lesson);
+        session.setAttribute("lesson", lesson);
+        return "redirect:/teacher/fillStudents";
+    }
+
+    @GetMapping("/fillStudents")
+    public String fillStudents(Model model) {
+        List<Student> allStudents = studentService.findAll();
+        model.addAttribute("allStudents", allStudents);
+        return "fillStudents";
+    }
+
+    @PostMapping("/fillStudents")
+    public String fillStudents(String studentSurname , HttpSession session) {
+        Student student = studentService.bySurname(studentSurname);
+        Lesson lesson = (Lesson) session.getAttribute("lesson");
+        lesson.getStudents().add(student);
+        lessonService.update(lesson);
+        return "redirect:/teacher/fillStudents";
     }
 
     @GetMapping("/logout")

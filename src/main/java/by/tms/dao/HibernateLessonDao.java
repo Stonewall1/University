@@ -45,7 +45,7 @@ public class HibernateLessonDao implements HibernateDao<Lesson, Long> {
     @Override
     public List<Lesson> findAll() {
         Session session = sessionFactory.getCurrentSession();
-        return session.createQuery("from Lesson " , Lesson.class).getResultList();
+        return session.createQuery("from Lesson ", Lesson.class).getResultList();
     }
 
     @Override
@@ -57,7 +57,9 @@ public class HibernateLessonDao implements HibernateDao<Lesson, Long> {
     }
 
     @Override
-    public Lesson update(Lesson entity) {
-        return null;
+    public Lesson update(Lesson lesson) {
+        Session session = sessionFactory.getCurrentSession();
+        session.update(lesson);
+        return lesson;
     }
 }
