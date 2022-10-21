@@ -47,8 +47,12 @@ public class TeacherService {
         List<Teacher> teachers = findAll().stream().filter(teacher1 -> teacher1.equals(teacher)).toList();
         return teachers.size() > 0;
     }
-    @Transactional
+    @Transactional(readOnly = true)
     public Teacher bySurname(String surname){
         return hibernateTeacherDao.findByParameter(surname);
+    }
+    @Transactional
+    public Teacher update(Teacher teacher){
+        return hibernateTeacherDao.update(teacher);
     }
 }

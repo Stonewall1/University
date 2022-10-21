@@ -31,4 +31,8 @@ public class SubjectService {
         List<Subject> subjects = findAll().stream().filter(sub -> sub.equals(subject)).toList();
         return subjects.size() > 0;
     }
+    @Transactional(readOnly = true)
+    public Subject findBySubjectName(String subjectName){
+        return hibernateSubjectDao.findByParameter(subjectName);
+    }
 }

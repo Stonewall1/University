@@ -65,4 +65,11 @@ public class HibernateStudentDao implements HibernateDao<Student, Long> {
                 .setParameter("s", surname)
                 .getSingleResult();
     }
+
+    @Override
+    public Student update(Student student) {
+        Session session = sessionFactory.getCurrentSession();
+        session.update(student);
+        return student;
+    }
 }

@@ -1,6 +1,7 @@
 package by.tms.dao;
 
 import by.tms.entity.Subject;
+import by.tms.entity.Teacher;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Component;
@@ -45,11 +46,19 @@ public class HibernateSubjectDao implements HibernateDao<Subject, Long> {
     @Override
     public List<Subject> findAll() {
         Session session = sessionFactory.getCurrentSession();
-        return session.createQuery("from Subject " , Subject.class).getResultList();
+        return session.createQuery("from Subject" , Subject.class).getResultList();
     }
 
     @Override
-    public Subject findByParameter(String param) {
+    public Subject findByParameter(String subjectName) {
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("from Subject where subjectName =:s", Subject.class)
+                .setParameter("s", subjectName)
+                .getSingleResult();
+    }
+
+    @Override
+    public Subject update(Subject entity) {
         return null;
     }
 }

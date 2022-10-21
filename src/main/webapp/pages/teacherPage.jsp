@@ -10,11 +10,15 @@
 </head>
 <body>
 <h2>Hello , ${sessionScope.currentTeacher.name} ${sessionScope.currentTeacher.surname}</h2>
+<a href="/teacher/addSubjects">Add subjects</a>
 <h2>Subjects you teach : </h2>
 <c:forEach var="subject" items="${teacherSubjects}">
     <p>${subject.id}.${subject.subjectName}</p>
 </c:forEach>
-
+<br>
+<a href="/teacher/createLesson">Create Lesson</a>
+<a href="/teacher/rateStudent">Rate a student</a>
+<br>
 <a href="/teacher/logout">Logout</a>
 <a href="/">Back</a>
 </body>

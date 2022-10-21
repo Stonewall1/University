@@ -55,4 +55,9 @@ public class HibernateAdminDao implements HibernateDao<Admin, Long> {
                 .setParameter("s", surname)
                 .getSingleResult();
     }
+
+    @Override
+    public Admin update(Admin entity) {
+        return null;
+    }
 }

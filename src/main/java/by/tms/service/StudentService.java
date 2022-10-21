@@ -49,8 +49,12 @@ public class StudentService {
         List<Student> students = findAll().stream().filter(student1 -> student1.equals(student)).toList();
         return students.size() > 0;
     }
-    @Transactional
+    @Transactional(readOnly = true)
     public Student bySurname(String surname){
         return hibernateStudentDao.findByParameter(surname);
+    }
+    @Transactional
+    public Student update(Student student){
+        return hibernateStudentDao.update(student);
     }
 }

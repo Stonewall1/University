@@ -2,6 +2,7 @@ package by.tms.controller;
 
 import by.tms.entity.Student;
 import by.tms.entity.Subject;
+import by.tms.entity.Teacher;
 import by.tms.service.StudentService;
 import by.tms.service.SubjectService;
 import org.springframework.stereotype.Controller;
@@ -29,9 +30,7 @@ public class StudentController {
 
 
     @GetMapping("/registration")
-    public String registration(@ModelAttribute("newStudent") Student student , Model model) {
-        List<Subject> allSubjects = subjectService.findAll();
-        model.addAttribute("allSubjects", allSubjects);
+    public String registration(@ModelAttribute("newStudent") Student student) {
         return "studentRegistration";
     }
 
@@ -72,6 +71,22 @@ public class StudentController {
             return "studentPage";
         }
         return "redirect:/student/login";
+    }
+
+    @GetMapping("/addSubjects")
+    public String addSubjects(Model model){
+        List<Subject> allSubjects = subjectService.findAll();
+        model.addAttribute("allSubjects", allSubjects);
+        return "studentAddSubjects";
+    }
+    @PostMapping("/addSubjects")
+    public String addSubjects(HttpSession session , String subjectName){
+        Student currentStudent = (Student) session.getAttribute("currentStudent");
+        Subject bySubjectName = subjectService.findBySubjectName(subjectName);
+        currentStudent.getSubjects().add(bySubjectName);
+        Student update = studentService.update(currentStudent);
+        session.setAttribute("currentStudent", update);
+        return "redirect:/student/addSubjects";
     }
 
     @GetMapping("/logout")

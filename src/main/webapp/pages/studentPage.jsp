@@ -15,9 +15,13 @@
     <p>${subject.id}.${subject.subjectName}</p>
 </c:forEach>
 <br>
+<a href="/student/addSubjects">Add Subjects</a>
+<br>
 <h2>Your results :</h2>
 <c:forEach var="result" items="${studentResults}">
     <p>${result}</p>
 </c:forEach>
+<a href="/student/logout">Logout</a>
+<a href="/">Back</a>
 </body>
 </html>

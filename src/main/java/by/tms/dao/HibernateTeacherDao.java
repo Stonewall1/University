@@ -1,6 +1,5 @@
 package by.tms.dao;
 
-import by.tms.entity.Admin;
 import by.tms.entity.Teacher;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -43,7 +42,7 @@ public class HibernateTeacherDao implements HibernateDao<Teacher , Long> {
     @Override
     public Teacher update(Long id, String name, String surname , String password) {
         Session session = sessionFactory.getCurrentSession();
-        session.createQuery("update Teacher set name = :nameP , surname = : surnameP , password =: passwordP where id = : ip")
+        session.createQuery("update Teacher set name = :nameP , surname = : surnameP , password =: passwordP where id = :ip")
                 .setParameter("ip" , id)
                 .setParameter("nameP" , name)
                 .setParameter("surnameP" , surname)
@@ -64,5 +63,12 @@ public class HibernateTeacherDao implements HibernateDao<Teacher , Long> {
         return session.createQuery("from Teacher where surname =:s", Teacher.class)
                 .setParameter("s", surname)
                 .getSingleResult();
+    }
+
+    @Override
+    public Teacher update(Teacher teacher) {
+        Session session = sessionFactory.getCurrentSession();
+        session.update(teacher);
+        return teacher;
     }
 }

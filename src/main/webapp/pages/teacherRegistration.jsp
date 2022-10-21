@@ -22,12 +22,6 @@
     <br>
     <s:errors path="password" cssStyle="color: red"/>
     <br>
-    <br>
-    <p>Select subject(s) to teach :</p>
-    <c:forEach var="sub" items="${allSubjects}">
-        <s:checkbox path="subjects" value="${sub.subjectName}"/>${sub.subjectName}
-    </c:forEach>
-    <br>
     <s:button>Register</s:button>
 </s:form>
 <a href="/" class="btn btn-primary">Back</a>

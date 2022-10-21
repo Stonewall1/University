@@ -10,20 +10,23 @@ public class Lesson {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    private String lessonTheme;
+
     @OneToMany(cascade = CascadeType.ALL)
     private List<Student> students;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne//(cascade = CascadeType.ALL)
     private Teacher teacher;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne//(cascade = CascadeType.ALL)
     private Subject subject;
 
     public Lesson() {
     }
 
-    public Lesson(long id, List<Student> students, Teacher teacher, Subject subject) {
+    public Lesson(long id, String lessonTheme, List<Student> students, Teacher teacher, Subject subject) {
         this.id = id;
+        this.lessonTheme = lessonTheme;
         this.students = students;
         this.teacher = teacher;
         this.subject = subject;
@@ -35,6 +38,14 @@ public class Lesson {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public String getLessonTheme() {
+        return lessonTheme;
+    }
+
+    public void setLessonTheme(String lessonTheme) {
+        this.lessonTheme = lessonTheme;
     }
 
     public List<Student> getStudents() {
@@ -65,6 +76,7 @@ public class Lesson {
     public String toString() {
         return "Lesson{" +
                 "id=" + id +
+                ", lessonTheme='" + lessonTheme + '\'' +
                 ", students=" + students +
                 ", teacher=" + teacher +
                 ", subject=" + subject +

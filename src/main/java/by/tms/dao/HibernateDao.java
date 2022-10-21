@@ -9,4 +9,5 @@ public interface HibernateDao<T , ID> extends CrudDao<T , ID> {
     T update(ID id , String param1 , String param2 , String param3);
     List<T> findAll();
     T findByParameter(String param);
+    T update(T entity);
 }

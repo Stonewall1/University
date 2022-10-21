@@ -1,6 +1,5 @@
 package by.tms.entity;
 
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -25,7 +24,7 @@ public class Teacher {
     private String password;
 
     @Size(min = 1)
-    @OneToMany(cascade = CascadeType.ALL)
+    @ManyToMany//(cascade = CascadeType.ALL)
     private List<Subject> subjects;
 
     public Teacher() {
