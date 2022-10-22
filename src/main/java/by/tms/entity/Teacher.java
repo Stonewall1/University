@@ -24,7 +24,7 @@ public class Teacher {
     private String password;
 
     @Size(min = 1)
-    @ManyToMany//(cascade = CascadeType.ALL)
+    @ManyToMany
     private List<Subject> subjects;
 
     public Teacher() {

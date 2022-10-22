@@ -11,7 +11,7 @@
 <body>
 <h5>All students:</h5>
 <c:forEach var="student" items="${allStudents}">
-  <p>${student.name} ${student.surname} ${student.subjects}</p>
+  <p>${student.name} ${student.surname} ${student.subjects}<br/></p>
 </c:forEach>
 <form action="/teacher/fillStudents" method="post">
     <input type="text" name="studentSurname" placeholder="Student surname">

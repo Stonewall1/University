@@ -9,10 +9,10 @@ public class Result {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToOne//(cascade = CascadeType.ALL)
+    @ManyToOne
     private Student student;
 
-    @OneToOne//(cascade = CascadeType.ALL) //ManyToOne
+    @OneToOne //ManyToOne ??
     private Lesson lesson;
 
     private int performance;

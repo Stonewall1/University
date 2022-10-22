@@ -12,13 +12,13 @@ public class Lesson {
 
     private String lessonTheme;
 
-    @ManyToMany//(cascade = CascadeType.ALL)
+    @ManyToMany
     private List<Student> students;
 
-    @ManyToOne//(cascade = CascadeType.ALL) // ManyToOne
+    @ManyToOne
     private Teacher teacher;
 
-    @ManyToOne//(cascade = CascadeType.ALL) //ManyToOne
+    @ManyToOne
     private Subject subject;
 
     public Lesson() {

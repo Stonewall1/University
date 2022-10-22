@@ -22,12 +22,12 @@ public class Student {
     private String password;
 
     @Size(min = 1)
-    @ManyToMany//(cascade = CascadeType.ALL)
+    @ManyToMany
     private List<Subject> subjects;
 
     private double GPA;
 
-    @ManyToMany//(cascade = CascadeType.ALL)
+    @ManyToMany
     private List<Result> results;
 
     public Student() {
@@ -102,13 +102,9 @@ public class Student {
     @Override
     public String toString() {
         return "Student{" +
-                "id=" + id +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
-                ", password='" + password + '\'' +
                 ", subjects=" + subjects +
-                ", GPA=" + GPA +
-                ", results=" + results +
                 '}';
     }
 

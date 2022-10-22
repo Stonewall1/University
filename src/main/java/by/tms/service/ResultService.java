@@ -26,6 +26,10 @@ public class ResultService {
     public List<Result> findAll() {
         return hibernateResultDao.findAll();
     }
+    @Transactional
+    public List<Result> findAllResultsByStudentSurname(String surname){
+        return hibernateResultDao.findAllByParameter(surname);
+    }
 }
 
 

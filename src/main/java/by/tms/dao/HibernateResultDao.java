@@ -1,5 +1,6 @@
 package by.tms.dao;
 
+import by.tms.entity.Lesson;
 import by.tms.entity.Result;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -59,7 +60,10 @@ public class HibernateResultDao implements HibernateDao<Result, Long>{
     }
 
     @Override
-    public List<Result> findAllByParameter(String param) {
-        return null;
+    public List<Result> findAllByParameter(String studentSurname) {
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("from Result where student.surname =:s", Result.class)
+                .setParameter("s", studentSurname)
+                .getResultList();
     }
 }

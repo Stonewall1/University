@@ -1,7 +1,9 @@
 package by.tms.controller;
 
+import by.tms.entity.Result;
 import by.tms.entity.Student;
 import by.tms.entity.Subject;
+import by.tms.service.ResultService;
 import by.tms.service.StudentService;
 import by.tms.service.SubjectService;
 import org.springframework.stereotype.Controller;
@@ -21,10 +23,12 @@ import java.util.List;
 public class StudentController {
     private final StudentService studentService;
     private final SubjectService subjectService;
+    private final ResultService resultService;
 
-    public StudentController(StudentService studentService, SubjectService subjectService) {
+    public StudentController(StudentService studentService, SubjectService subjectService, ResultService resultService) {
         this.studentService = studentService;
         this.subjectService = subjectService;
+        this.resultService = resultService;
     }
 
 
@@ -66,10 +70,16 @@ public class StudentController {
         if (session.getAttribute("currentStudent") != null) {
             Student student = (Student) session.getAttribute("currentStudent");
             model.addAttribute("studentSubjects", student.getSubjects());
-            model.addAttribute("studentResults" , student.getResults());
             return "studentPage";
         }
         return "redirect:/student/login";
+    }
+    @GetMapping("/viewResults")
+    public String viewResults(HttpSession session , Model model){
+        Student student = (Student) session.getAttribute("currentStudent");
+        List<Result> allResultsByStudentSurname = resultService.findAllResultsByStudentSurname(student.getSurname());
+        model.addAttribute("allResults" , allResultsByStudentSurname);
+        return "viewResults";
     }
 
     @GetMapping("/addSubjects")
