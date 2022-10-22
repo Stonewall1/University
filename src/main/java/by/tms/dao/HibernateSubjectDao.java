@@ -1,7 +1,6 @@
 package by.tms.dao;
 
 import by.tms.entity.Subject;
-import by.tms.entity.Teacher;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Component;
@@ -59,6 +58,11 @@ public class HibernateSubjectDao implements HibernateDao<Subject, Long> {
 
     @Override
     public Subject update(Subject entity) {
+        return null;
+    }
+
+    @Override
+    public List<Subject> findAllByParameter(String param) {
         return null;
     }
 }

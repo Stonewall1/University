@@ -29,11 +29,15 @@ public class LessonService {
     }
 
     @Transactional(readOnly = true)
-    public Lesson findByTeacherSurname(String teacherSurname) {
-        return hibernateLessonDao.findByParameter(teacherSurname);
+    public Lesson findByLessonTheme(String theme) {
+        return hibernateLessonDao.findByParameter(theme);
     }
     @Transactional
     public Lesson update(Lesson lesson){
         return hibernateLessonDao.update(lesson);
+    }
+    @Transactional(readOnly = true)
+    public List<Lesson> findLessonsByTeacherSurname(String surname){
+        return hibernateLessonDao.findAllByParameter(surname);
     }
 }

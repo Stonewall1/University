@@ -27,7 +27,7 @@ public class Student {
 
     private double GPA;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @ManyToMany//(cascade = CascadeType.ALL)
     private List<Result> results;
 
     public Student() {

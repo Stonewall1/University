@@ -2,7 +2,6 @@ package by.tms.controller;
 
 import by.tms.entity.Student;
 import by.tms.entity.Subject;
-import by.tms.entity.Teacher;
 import by.tms.service.StudentService;
 import by.tms.service.SubjectService;
 import org.springframework.stereotype.Controller;

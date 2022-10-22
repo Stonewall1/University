@@ -9,19 +9,25 @@ public class Result {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne//(cascade = CascadeType.ALL)
     private Student student;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne//(cascade = CascadeType.ALL) //ManyToOne
     private Lesson lesson;
 
-    private Integer performance;
+    private int performance;
 
     public Result() {
     }
 
-    public Result(long id, Student student, Lesson lesson, Integer performance) {
+    public Result(long id, Student student, Lesson lesson, int performance) {
         this.id = id;
+        this.student = student;
+        this.lesson = lesson;
+        this.performance = performance;
+    }
+
+    public Result(Student student, Lesson lesson, int performance) {
         this.student = student;
         this.lesson = lesson;
         this.performance = performance;
@@ -51,11 +57,11 @@ public class Result {
         this.lesson = lesson;
     }
 
-    public Integer getPerformance() {
+    public int getPerformance() {
         return performance;
     }
 
-    public void setPerformance(Integer performance) {
+    public void setPerformance(int performance) {
         this.performance = performance;
     }
 

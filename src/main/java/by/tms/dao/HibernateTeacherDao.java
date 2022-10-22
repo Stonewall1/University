@@ -71,4 +71,9 @@ public class HibernateTeacherDao implements HibernateDao<Teacher , Long> {
         session.update(teacher);
         return teacher;
     }
+
+    @Override
+    public List<Teacher> findAllByParameter(String param) {
+        return null;
+    }
 }

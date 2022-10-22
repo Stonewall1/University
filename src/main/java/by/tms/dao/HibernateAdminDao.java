@@ -60,4 +60,9 @@ public class HibernateAdminDao implements HibernateDao<Admin, Long> {
     public Admin update(Admin entity) {
         return null;
     }
+
+    @Override
+    public List<Admin> findAllByParameter(String param) {
+        return null;
+    }
 }

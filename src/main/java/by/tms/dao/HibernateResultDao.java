@@ -57,4 +57,9 @@ public class HibernateResultDao implements HibernateDao<Result, Long>{
     public Result update(Result entity) {
         return null;
     }
+
+    @Override
+    public List<Result> findAllByParameter(String param) {
+        return null;
+    }
 }

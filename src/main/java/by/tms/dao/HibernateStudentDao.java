@@ -1,7 +1,6 @@
 package by.tms.dao;
 
 import by.tms.entity.Student;
-import by.tms.entity.Teacher;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Component;
@@ -71,5 +70,10 @@ public class HibernateStudentDao implements HibernateDao<Student, Long> {
         Session session = sessionFactory.getCurrentSession();
         session.update(student);
         return student;
+    }
+
+    @Override
+    public List<Student> findAllByParameter(String param) {
+        return null;
     }
 }

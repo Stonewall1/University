@@ -17,6 +17,12 @@ public class ResultService {
         this.hibernateResultDao = hibernateResultDao;
     }
     @Transactional
+    public Result save(Result result){
+        hibernateResultDao.save(result);
+        return result;
+    }
+
+    @Transactional
     public List<Result> findAll() {
         return hibernateResultDao.findAll();
     }

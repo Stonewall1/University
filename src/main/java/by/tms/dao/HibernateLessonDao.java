@@ -49,10 +49,10 @@ public class HibernateLessonDao implements HibernateDao<Lesson, Long> {
     }
 
     @Override
-    public Lesson findByParameter(String teacherSurname) {
+    public Lesson findByParameter(String lessonTheme) {
         Session session = sessionFactory.getCurrentSession();
-        return session.createQuery("from Lesson where teacher.surname =:s", Lesson.class)
-                .setParameter("s", teacherSurname)
+        return session.createQuery("from Lesson where lessonTheme =:s", Lesson.class)
+                .setParameter("s", lessonTheme)
                 .getSingleResult();
     }
 
@@ -61,5 +61,13 @@ public class HibernateLessonDao implements HibernateDao<Lesson, Long> {
         Session session = sessionFactory.getCurrentSession();
         session.update(lesson);
         return lesson;
+    }
+
+    @Override
+    public List<Lesson> findAllByParameter(String teacherSurname) {
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("from Lesson where teacher.surname =:s", Lesson.class)
+                .setParameter("s", teacherSurname)
+                .getResultList();
     }
 }

@@ -1,13 +1,8 @@
 package by.tms.controller;
 
-import by.tms.entity.Lesson;
-import by.tms.entity.Student;
-import by.tms.entity.Subject;
-import by.tms.entity.Teacher;
-import by.tms.service.LessonService;
-import by.tms.service.StudentService;
-import by.tms.service.SubjectService;
-import by.tms.service.TeacherService;
+import by.tms.dto.ResultDto;
+import by.tms.entity.*;
+import by.tms.service.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -28,12 +23,14 @@ public class TeacherController {
     private final SubjectService subjectService;
     private final StudentService studentService;
     private final LessonService lessonService;
+    private final ResultService resultService;
 
-    public TeacherController(TeacherService teacherService, SubjectService subjectService, StudentService studentService, LessonService lessonService) {
+    public TeacherController(TeacherService teacherService, SubjectService subjectService, StudentService studentService, LessonService lessonService, ResultService resultService) {
         this.teacherService = teacherService;
         this.subjectService = subjectService;
         this.studentService = studentService;
         this.lessonService = lessonService;
+        this.resultService = resultService;
     }
 
     @GetMapping("/registration")
@@ -137,6 +134,32 @@ public class TeacherController {
         lesson.getStudents().add(student);
         lessonService.update(lesson);
         return "redirect:/teacher/fillStudents";
+    }
+
+    @GetMapping("/rateStudent")
+    public String rateStudent(@ModelAttribute("result") ResultDto resultDto, HttpSession session , Model model){
+        Teacher teacher = (Teacher) session.getAttribute("currentTeacher");
+        List<Lesson> lessonsByTeacherSurname = lessonService.findLessonsByTeacherSurname(teacher.getSurname());
+        model.addAttribute("teacherLessons" , lessonsByTeacherSurname);
+        return "rateStudent";
+    }
+    @PostMapping("/rateStudent")
+    public String rateStudent(@Valid @ModelAttribute("result") ResultDto resultDto, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            return "rateStudent";
+        }
+        Lesson byLessonTheme = lessonService.findByLessonTheme(resultDto.getLessonTheme());
+        Student student = studentService.bySurname(resultDto.getStudentSurname());
+
+        Result result = new Result();
+        result.setLesson(byLessonTheme);
+        result.setStudent(student);
+        result.setPerformance(resultDto.getPerformance());
+        resultService.save(result);
+
+        student.getResults().add(result);
+        studentService.update(student);
+        return "redirect:/teacher/teacherPage";
     }
 
     @GetMapping("/logout")
