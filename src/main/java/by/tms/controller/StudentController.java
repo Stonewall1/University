@@ -79,6 +79,10 @@ public class StudentController {
         Student student = (Student) session.getAttribute("currentStudent");
         List<Result> allResultsByStudentSurname = resultService.findAllResultsByStudentSurname(student.getSurname());
         model.addAttribute("allResults" , allResultsByStudentSurname);
+        double gpa = studentService.calculateStudentGPA(student);
+        student.setGPA(gpa);
+        studentService.update(student);
+        model.addAttribute("gpa" , gpa);
         return "viewResults";
     }
 

@@ -13,6 +13,7 @@
 <c:forEach var="result" items="${allResults}">
     <p>Subject: ${result.lesson.subject.subjectName} Theme: ${result.lesson.lessonTheme} Mark: ${result.performance} Teacher: ${result.lesson.teacher.surname}</p>
 </c:forEach>
+<h2>Your GPA: ${gpa}</h2>
 <a href="/student/studentPage">Back</a>
 </body>
 </html>
